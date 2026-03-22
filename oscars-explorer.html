@@ -1,461 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oscar Explorer — Academy Awards 2000–Present</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --gold: #C9A84C;
-    --gold-light: #F0D080;
-    --gold-dim: #7A5C1A;
-    --black: #0A0804;
-    --surface: #1A1610;
-    --surface2: #241E14;
-    --text: #E8D8B0;
-    --text-dim: #8A7A5A;
-    --accent: #E8B84B;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    background: var(--black);
-    color: var(--text);
-    font-family: 'Cormorant Garamond', serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-  body::before {
-    content:'';
-    position:fixed; inset:0;
-    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events:none; z-index:1000; opacity:.6;
-  }
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Crestwood University — Portal</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* ── Hero ── */
-  .hero { text-align:center; padding:70px 20px 50px; }
-  .hero::after { content:''; display:block; width:1px; height:60px; background:linear-gradient(to bottom,var(--gold),transparent); margin:40px auto 0; }
-  .statuette { font-size:52px; display:block; margin-bottom:20px; animation:float 4s ease-in-out infinite; }
-  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-  .hero-eyebrow { font-family:'Josefin Sans',sans-serif; font-size:10px; letter-spacing:6px; text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
-  .hero-title { font-family:'Playfair Display',serif; font-size:clamp(42px,8vw,88px); font-weight:900; line-height:.9; color:var(--gold-light); text-shadow:0 0 80px rgba(201,168,76,.3); margin-bottom:12px; letter-spacing:-1px; }
-  .hero-title em { font-style:italic; color:var(--accent); }
-  .hero-sub { font-size:18px; color:var(--text-dim); font-style:italic; letter-spacing:1px; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-  /* ── Search ── */
-  .search-wrap { max-width:720px; margin:0 auto; padding:0 20px 60px; }
-  .search-label { font-family:'Josefin Sans',sans-serif; font-size:10px; letter-spacing:5px; text-transform:uppercase; color:var(--gold-dim); display:block; margin-bottom:14px; text-align:center; }
-  .search-row { display:flex; border:1px solid var(--gold-dim); background:var(--surface); transition:border-color .3s,box-shadow .3s; }
-  .search-row:focus-within { border-color:var(--gold); box-shadow:0 0 30px rgba(201,168,76,.15); }
-  .search-row input { flex:1; background:transparent; border:none; outline:none; color:var(--text); font-family:'Cormorant Garamond',serif; font-size:18px; padding:18px 24px; }
-  .search-row input::placeholder { color:var(--text-dim); font-style:italic; }
-  .search-row button { background:var(--gold); border:none; color:var(--black); padding:0 28px; cursor:pointer; font-family:'Josefin Sans',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; font-weight:600; transition:background .2s; flex-shrink:0; }
-  .search-row button:hover { background:var(--gold-light); }
-  .search-row button:disabled { opacity:.5; cursor:not-allowed; }
-  .year-pills { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:18px; }
-  .year-pill { font-family:'Josefin Sans',sans-serif; font-size:11px; letter-spacing:2px; padding:5px 14px; border:1px solid var(--surface2); background:var(--surface); color:var(--text-dim); cursor:pointer; transition:all .2s; }
-  .year-pill:hover,.year-pill.active { border-color:var(--gold); color:var(--gold); background:rgba(201,168,76,.07); }
+    /* ── Login ── */
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      width: 360px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
 
-  /* ── Results ── */
-  .results { max-width:1200px; margin:0 auto; padding:0 20px 80px; }
-  .results-header { text-align:center; margin-bottom:50px; }
-  .results-header h2 { font-family:'Playfair Display',serif; font-size:clamp(28px,5vw,48px); font-weight:700; font-style:italic; color:var(--gold-light); margin-bottom:8px; }
-  .results-header p { font-family:'Josefin Sans',sans-serif; font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--text-dim); }
+    .card h1 { font-size: 22px; color: #1a3060; margin-bottom: 4px; }
+    .card p  { font-size: 13px; color: #888; margin-bottom: 28px; }
 
-  .divider { display:flex; align-items:center; gap:16px; margin:28px 0; }
-  .divider::before { content:''; flex:1; height:1px; background:linear-gradient(to right,transparent,var(--gold-dim)); }
-  .divider::after  { content:''; flex:1; height:1px; background:linear-gradient(to left,transparent,var(--gold-dim)); }
-  .divider-star { color:var(--gold); font-size:14px; }
+    .card input, .card select {
+      width: 100%;
+      padding: 11px 14px;
+      margin-bottom: 14px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+    }
+    .card input:focus, .card select:focus { border-color: #1a3060; }
 
-  /* ── Best Picture Hero ── */
-  .best-picture-card {
-    display:grid; grid-template-columns:200px 1fr;
-    background:linear-gradient(135deg,var(--surface2) 0%,#1F1A0E 100%);
-    border:1px solid var(--gold-dim); margin-bottom:44px; overflow:hidden;
-    animation:fadeUp .4s ease both; position:relative;
-  }
-  .best-picture-card::after { content:'🏆'; position:absolute; right:28px; bottom:20px; font-size:72px; opacity:.06; pointer-events:none; }
-  .bp-img-wrap { width:200px; min-height:300px; overflow:hidden; flex-shrink:0; background:var(--surface); display:flex; align-items:center; justify-content:center; }
-  .bp-img-wrap img { width:200px; min-height:300px; object-fit:cover; display:block; }
-  .bp-placeholder { font-size:56px; opacity:.15; }
-  .bp-info { padding:36px 40px; display:flex; flex-direction:column; justify-content:center; gap:12px; }
-  .bp-label { font-family:'Josefin Sans',sans-serif; font-size:9px; letter-spacing:5px; text-transform:uppercase; color:var(--gold); }
-  .bp-title { font-family:'Playfair Display',serif; font-size:clamp(24px,4vw,40px); font-weight:900; color:var(--gold-light); line-height:1.1; text-shadow:0 0 30px rgba(201,168,76,.2); }
-  .bp-detail { font-size:16px; color:var(--text-dim); font-style:italic; line-height:1.5; }
+    .card button {
+      width: 100%;
+      padding: 12px;
+      background: #1a3060;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+    .card button:hover { background: #243f80; }
 
-  /* ── Category ── */
-  .cat-section { margin-bottom:52px; animation:fadeUp .5s ease both; }
-  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-  .cat-title { font-family:'Josefin Sans',sans-serif; font-size:10px; letter-spacing:5px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; padding-left:16px; border-left:2px solid var(--gold); }
-  .awards-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:2px; }
+    .demo-btn {
+      background: white !important;
+      color: #1a3060 !important;
+      border: 1px solid #1a3060 !important;
+      margin-top: 10px !important;
+    }
 
-  /* ── Award Card ── */
-  .award-card { background:var(--surface); border:1px solid transparent; border-bottom:1px solid var(--surface2); border-right:1px solid var(--surface2); transition:all .3s; position:relative; overflow:hidden; display:flex; flex-direction:column; }
-  .award-card::before { content:''; position:absolute; top:0; left:0; width:0; height:2px; background:var(--gold); transition:width .4s ease; z-index:2; }
-  .award-card:hover { border-color:var(--gold-dim); background:var(--surface2); }
-  .award-card:hover::before { width:100%; }
+    /* ── Dashboard ── */
+    #dashboard {
+      display: none;
+      width: 100%;
+      padding: 32px;
+    }
 
-  .card-img-wrap { width:100%; height:200px; overflow:hidden; background:var(--surface2); flex-shrink:0; position:relative; }
-  .card-img-wrap.tall { height:250px; }
-  .card-img-wrap img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; transition:transform .5s ease; }
-  .award-card:hover .card-img-wrap img { transform:scale(1.05); }
-  .card-img-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:44px; opacity:.1; background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%); }
-  .img-badge { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(to top,rgba(10,8,4,.85) 0%,transparent 100%); padding:20px 14px 10px; font-family:'Josefin Sans',sans-serif; font-size:8px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); }
+    .dash-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+    .dash-header h1 { font-size: 22px; color: #1a3060; }
+    .dash-header button {
+      padding: 8px 18px;
+      background: #1a3060;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+    }
 
-  .card-body { padding:18px 20px 20px; flex:1; position:relative; }
-  .award-name { font-family:'Josefin Sans',sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--text-dim); margin-bottom:8px; }
-  .award-winner { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--gold-light); line-height:1.2; margin-bottom:5px; }
-  .award-detail { font-size:14px; color:var(--text-dim); font-style:italic; line-height:1.4; }
-  .oscar-icon { position:absolute; right:12px; bottom:12px; font-size:22px; opacity:.07; }
+    .kpis {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .kpi {
+      background: white;
+      border-radius: 10px;
+      padding: 20px 24px;
+      flex: 1;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    .kpi .num { font-size: 26px; font-weight: 700; color: #1a3060; }
+    .kpi .lbl { font-size: 12px; color: #888; margin-top: 4px; }
 
-  /* ── Loading ── */
-  .loading { text-align:center; padding:80px 20px; display:none; }
-  .loading.visible { display:block; }
-  .loading-statuette { font-size:48px; animation:pulse 1.5s ease-in-out infinite; }
-  @keyframes pulse { 0%,100%{opacity:.4;transform:scale(.95)} 50%{opacity:1;transform:scale(1.05)} }
-  .loading p { font-family:'Josefin Sans',sans-serif; font-size:10px; letter-spacing:5px; text-transform:uppercase; color:var(--text-dim); margin-top:20px; }
-  .loading-step { margin-top:10px; font-size:15px; font-style:italic; color:var(--gold-dim); min-height:22px; }
+    .table-box {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
+    .table-box input {
+      width: 100%;
+      padding: 12px 16px;
+      border: none;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+      outline: none;
+    }
 
-  .error-msg { text-align:center; padding:40px 20px; color:#C0634A; font-size:18px; font-style:italic; display:none; }
-  .error-msg.visible { display:block; }
+    table { width: 100%; border-collapse: collapse; }
+    th {
+      background: #f7f8fa;
+      text-align: left;
+      padding: 11px 16px;
+      font-size: 12px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    td { padding: 12px 16px; font-size: 14px; border-top: 1px solid #f0f0f0; }
+    tr:hover td { background: #fafbff; }
 
-  footer { text-align:center; padding:40px 20px; border-top:1px solid var(--surface2); font-family:'Josefin Sans',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--text-dim); }
-  footer span { color:var(--gold-dim); }
-
-  @media(max-width:640px){
-    .best-picture-card { grid-template-columns:120px 1fr; }
-    .bp-img-wrap { width:120px; min-height:180px; }
-    .bp-img-wrap img { width:120px; min-height:180px; }
-    .bp-info { padding:18px; }
-    .awards-grid { grid-template-columns:1fr 1fr; }
-    .search-row button { padding:0 14px; }
-  }
-  @media(max-width:400px){ .awards-grid{ grid-template-columns:1fr; } }
-</style>
+    .badge {
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .active    { background: #e6f9ee; color: #1a7a3c; }
+    .probation { background: #fff8e0; color: #9a6500; }
+    .inactive  { background: #fdecea; color: #b52a1d; }
+  </style>
 </head>
 <body>
 
-<header class="hero">
-  <span class="statuette">🏆</span>
-  <p class="hero-eyebrow">Academy Awards Explorer</p>
-  <h1 class="hero-title">The <em>Oscars</em><br>Archive</h1>
-  <p class="hero-sub">Every winner, every category, every year — 2000 to present</p>
-</header>
+<!-- Login -->
+<div class="card" id="loginCard">
+  <h1>🎓 Crestwood University</h1>
+  <p>Sign in to the Student Portal</p>
 
-<section class="search-wrap">
-  <label class="search-label">Search by year, film, or category</label>
-  <div class="search-row">
-    <input type="text" id="searchInput" placeholder="e.g. 2019, Parasite, Best Actress…"/>
-    <button id="searchBtn" onclick="doSearch()">Search</button>
-  </div>
-  <div class="year-pills" id="yearPills"></div>
-</section>
+  <select id="role">
+    <option value="">Select role…</option>
+    <option>Student</option>
+    <option>Faculty</option>
+    <option>Administrator</option>
+  </select>
+  <input type="email" id="email" placeholder="University email"/>
+  <input type="password" id="pass" placeholder="Password"/>
 
-<div class="loading" id="loading">
-  <div class="loading-statuette">🏆</div>
-  <p>Consulting the Academy…</p>
-  <div class="loading-step" id="loadingStep">Fetching award data…</div>
+  <button onclick="login()">Sign In</button>
+  <button class="demo-btn" onclick="demo()">Demo — Enter as Admin</button>
 </div>
-<div class="error-msg" id="errorMsg"></div>
-<section class="results" id="results"></section>
 
-<footer>
-  <span>✦</span> &nbsp; Oscar Explorer &nbsp; <span>✦</span> &nbsp; Academy Awards 2000–2026 &nbsp; <span>✦</span>
-</footer>
+<!-- Dashboard -->
+<div id="dashboard">
+  <div class="dash-header">
+    <h1>🎓 Student Portal — <span id="userName"></span></h1>
+    <button onclick="logout()">Log Out</button>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="num">12,418</div><div class="lbl">Enrolled Students</div></div>
+    <div class="kpi"><div class="num">3.47</div><div class="lbl">Average GPA</div></div>
+    <div class="kpi"><div class="num">94.2%</div><div class="lbl">Attendance Rate</div></div>
+    <div class="kpi"><div class="num">87</div><div class="lbl">On Probation</div></div>
+  </div>
+
+  <div class="table-box">
+    <input type="text" placeholder="Search students…" oninput="search(this.value)"/>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>Name</th><th>Department</th><th>Year</th><th>GPA</th><th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+</div>
 
 <script>
-// ─── Wikipedia REST API for images ────────────────────────────────
-// Uses en.wikipedia.org/api/rest_v1/page/summary/{title}
-// Returns a thumbnail url — fully CORS-safe, no API key needed.
-const wikiCache = {};
+  const students = [
+    { id:"CU-2021-0041", name:"Amelia Hartwell",  dept:"Computer Science",  year:4, gpa:3.92, status:"active"    },
+    { id:"CU-2022-0178", name:"Marcus Delgado",    dept:"Business Admin",    year:3, gpa:3.45, status:"active"    },
+    { id:"CU-2023-0205", name:"Sophia Chen",       dept:"Biomedical Eng.",   year:2, gpa:3.78, status:"active"    },
+    { id:"CU-2024-0390", name:"Elijah Okonkwo",    dept:"Political Science", year:1, gpa:2.91, status:"active"    },
+    { id:"CU-2021-0088", name:"Isabella Torres",   dept:"Psychology",        year:4, gpa:3.60, status:"active"    },
+    { id:"CU-2022-0334", name:"Noah Fitzgerald",   dept:"Architecture",      year:3, gpa:2.15, status:"probation" },
+    { id:"CU-2023-0451", name:"Aisha Rahman",      dept:"Data Science",      year:2, gpa:4.00, status:"active"    },
+    { id:"CU-2020-0019", name:"James Whitmore",    dept:"Mechanical Eng.",   year:5, gpa:3.30, status:"active"    },
+    { id:"CU-2024-0102", name:"Camille Beaumont",  dept:"Fine Arts",         year:1, gpa:3.10, status:"active"    },
+    { id:"CU-2021-0267", name:"Samuel Okafor",     dept:"Law & Society",     year:4, gpa:1.98, status:"inactive"  },
+  ];
 
-async function getWikiImage(searchTitle) {
-  if (!searchTitle) return null;
-  if (searchTitle in wikiCache) return wikiCache[searchTitle];
-
-  // Encode title for URL (spaces → underscores)
-  const title = searchTitle.trim().replace(/\s+/g, '_');
-  try {
-    const res = await fetch(
-      `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`,
-      { headers: { 'Accept': 'application/json' } }
-    );
-    if (!res.ok) throw new Error('not found');
-    const data = await res.json();
-    // prefer originalimage, fall back to thumbnail
-    const url = data.originalimage?.source || data.thumbnail?.source || null;
-    wikiCache[searchTitle] = url;
-    return url;
-  } catch {
-    // Try a fuzzy Wikipedia search as fallback
-    try {
-      const r2 = await fetch(
-        `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(searchTitle)}&srlimit=1&prop=pageimages&format=json&origin=*`
-      );
-      const d2 = await r2.json();
-      const pageTitle = d2.query?.search?.[0]?.title;
-      if (!pageTitle) { wikiCache[searchTitle] = null; return null; }
-      const r3 = await fetch(
-        `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(pageTitle.replace(/\s+/g,'_'))}`,
-        { headers: { 'Accept': 'application/json' } }
-      );
-      const d3 = await r3.json();
-      const url = d3.originalimage?.source || d3.thumbnail?.source || null;
-      wikiCache[searchTitle] = url;
-      return url;
-    } catch {
-      wikiCache[searchTitle] = null;
-      return null;
-    }
-  }
-}
-
-// For movies, search "[Film Title] film" to get the film page
-async function getMovieImage(filmTitle, year) {
-  if (!filmTitle) return null;
-  // Try exact film page first
-  let url = await getWikiImage(`${filmTitle} film`);
-  if (!url) url = await getWikiImage(filmTitle);
-  return url;
-}
-
-// For people, use their name directly
-async function getPersonImage(name) {
-  return await getWikiImage(name);
-}
-
-// ─── Year pills ────────────────────────────────────────────────────
-const pillsWrap = document.getElementById('yearPills');
-const curYear = new Date().getFullYear();
-for (let y = curYear; y >= 2000; y--) {
-  const b = document.createElement('button');
-  b.className = 'year-pill';
-  b.textContent = y;
-  b.onclick = () => { document.getElementById('searchInput').value = y; doSearch(); };
-  pillsWrap.appendChild(b);
-}
-
-document.getElementById('searchInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') doSearch();
-});
-
-function setLoading(on, msg='') {
-  document.getElementById('loading').classList.toggle('visible', on);
-  document.getElementById('searchBtn').disabled = on;
-  if (!on) return;
-  document.getElementById('errorMsg').classList.remove('visible');
-  if (msg) document.getElementById('loadingStep').textContent = msg;
-}
-
-// ─── Main search ───────────────────────────────────────────────────
-async function doSearch() {
-  const q = document.getElementById('searchInput').value.trim();
-  if (!q) return;
-
-  document.querySelectorAll('.year-pill').forEach(p =>
-    p.classList.toggle('active', p.textContent === q)
-  );
-
-  setLoading(true, 'Fetching award data from the Academy…');
-  document.getElementById('results').innerHTML = '';
-
-  const SYSTEM = `You are a definitive expert on the Academy Awards (Oscars).
-Return ONLY a valid JSON object — no markdown fences, no prose, nothing else before or after.
-
-Schema:
-{
-  "title": "string",
-  "subtitle": "string",
-  "ceremonies": [
-    {
-      "year": 2019,
-      "ceremony": "91st Academy Awards",
-      "categories": [
-        {
-          "group": "Major Awards",
-          "awards": [
-            {
-              "category": "Best Picture",
-              "winner": "Green Book",
-              "detail": "Producers: Jim Burke, Charles B. Wessler, Brian Currie, Peter Farrelly, Nick Vallelonga",
-              "filmTitle": "Green Book",
-              "wikiFilmSearch": "Green Book film",
-              "personName": null,
-              "wikiPersonSearch": null,
-              "imageType": "poster"
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-
-Rules:
-1. Groups: "Major Awards" | "Acting" | "Directing & Writing" | "Technical & Craft" | "Documentary & International" | "Other"
-2. For every award:
-   - filmTitle: canonical movie title (or null)
-   - wikiFilmSearch: best Wikipedia search query for movie poster, e.g. "The Hurt Locker film" (or null)
-   - personName: for acting/directing, the winner's full real name (or null)
-   - wikiPersonSearch: best Wikipedia search query for person, e.g. "Cate Blanchett actress" (or null)
-   - imageType: "person" for acting awards, "poster" for everything else with a film
-3. For acting: personName = winner name, imageType = "person"
-4. "detail": human-friendly context (film for acting, producers for Best Picture, country for international)
-5. Cover ALL Oscar categories for the requested year(s). Be fully accurate.
-6. Film only: show only awards that film won. Category only: list all winners from 2000–present.`;
-
-  let parsed;
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 6000,
-        system: SYSTEM,
-        messages: [{ role: 'user', content: `Oscar winners for: ${q}` }]
-      })
-    });
-    const data = await res.json();
-    const raw = data.content.map(b => b.text || '').join('').replace(/```json|```/g,'').trim();
-    parsed = JSON.parse(raw);
-  } catch (err) {
-    document.getElementById('errorMsg').textContent = 'The envelope couldn\'t be opened — please try again.';
-    document.getElementById('errorMsg').classList.add('visible');
-    setLoading(false);
-    return;
+  function render(list) {
+    document.getElementById("tbody").innerHTML = list.map(s => `
+      <tr>
+        <td style="color:#888;font-size:12px;">${s.id}</td>
+        <td><strong>${s.name}</strong></td>
+        <td>${s.dept}</td>
+        <td>Year ${s.year}</td>
+        <td>${s.gpa.toFixed(2)}</td>
+        <td><span class="badge ${s.status}">${s.status.charAt(0).toUpperCase()+s.status.slice(1)}</span></td>
+      </tr>`).join("");
   }
 
-  // Pre-fetch all Wikipedia images in parallel
-  setLoading(true, 'Loading movie posters & portraits from Wikipedia…');
-  const tasks = [];
-  (parsed.ceremonies || []).forEach(ceremony => {
-    (ceremony.categories || []).forEach(group => {
-      (group.awards || []).forEach(award => {
-        if (award.imageType === 'person' && award.wikiPersonSearch) {
-          tasks.push(getWikiImage(award.wikiPersonSearch));
-        } else if (award.wikiFilmSearch) {
-          tasks.push(getWikiImage(award.wikiFilmSearch));
-        }
-      });
-    });
-  });
-  await Promise.allSettled(tasks);
-
-  setLoading(false);
-  renderResults(parsed);
-}
-
-// ─── Render ────────────────────────────────────────────────────────
-function renderResults(data) {
-  const root = document.getElementById('results');
-
-  const hdr = document.createElement('div');
-  hdr.className = 'results-header';
-  hdr.innerHTML = `<h2>${data.title || 'Oscar Winners'}</h2><p>${data.subtitle || ''}</p>`;
-  root.appendChild(hdr);
-
-  if (!data.ceremonies?.length) {
-    root.innerHTML += `<div style="text-align:center;padding:80px 20px;font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:var(--text-dim)">No results found.</div>`;
-    return;
+  function search(q) {
+    render(students.filter(s =>
+      s.name.toLowerCase().includes(q.toLowerCase()) ||
+      s.dept.toLowerCase().includes(q.toLowerCase()) ||
+      s.id.includes(q)
+    ));
   }
 
-  data.ceremonies.forEach(ceremony => {
-    const block = document.createElement('div');
+  function openDash(name) {
+    document.getElementById("userName").textContent = name;
+    document.getElementById("loginCard").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+    document.body.style.alignItems = "flex-start";
+    render(students);
+  }
 
-    // Divider
-    block.innerHTML += `<div class="divider"><div class="divider-star">✦</div></div>`;
+  function login() {
+    const email = document.getElementById("email").value.trim();
+    const pass  = document.getElementById("pass").value.trim();
+    const role  = document.getElementById("role").value;
+    if (!email || !pass || !role) return alert("Please fill in all fields.");
+    openDash(email.split("@")[0]);
+  }
 
-    // Ceremony heading
-    const ch = document.createElement('h3');
-    ch.style.cssText = `font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,30px);color:var(--gold-light);text-align:center;margin-bottom:34px;font-style:italic;`;
-    ch.textContent = `${ceremony.ceremony} — ${ceremony.year}`;
-    block.appendChild(ch);
+  function demo()   { openDash("Admin Demo"); }
 
-    // Find Best Picture
-    let bp = null;
-    (ceremony.categories||[]).forEach(g => (g.awards||[]).forEach(a => {
-      if (a.category?.toLowerCase().includes('best picture')) bp = a;
-    }));
-
-    // Best Picture hero
-    if (bp) {
-      const imgUrl = bp.wikiFilmSearch ? (wikiCache[bp.wikiFilmSearch] || null) : null;
-      const bpCard = document.createElement('div');
-      bpCard.className = 'best-picture-card';
-      bpCard.innerHTML = `
-        <div class="bp-img-wrap">
-          ${imgUrl
-            ? `<img src="${imgUrl}" alt="${bp.winner}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'bp-placeholder\\'>🎬</div>'">`
-            : `<div class="bp-placeholder">🎬</div>`}
-        </div>
-        <div class="bp-info">
-          <div class="bp-label">★ Best Picture — ${ceremony.year}</div>
-          <div class="bp-title">${bp.winner}</div>
-          ${bp.detail ? `<div class="bp-detail">${bp.detail}</div>` : ''}
-        </div>`;
-      block.appendChild(bpCard);
-    }
-
-    // All other categories
-    (ceremony.categories||[]).forEach((group, gi) => {
-      const awards = (group.awards||[]).filter(a => !a.category?.toLowerCase().includes('best picture'));
-      if (!awards.length) return;
-
-      const section = document.createElement('div');
-      section.className = 'cat-section';
-      section.style.animationDelay = `${gi*55}ms`;
-
-      const catLabel = document.createElement('div');
-      catLabel.className = 'cat-title';
-      catLabel.textContent = group.group;
-      section.appendChild(catLabel);
-
-      const grid = document.createElement('div');
-      grid.className = 'awards-grid';
-
-      awards.forEach(award => {
-        const card = document.createElement('div');
-        card.className = 'award-card';
-
-        // Pick image URL from cache
-        let imgUrl = null;
-        const isPerson = award.imageType === 'person';
-        if (isPerson && award.wikiPersonSearch) {
-          imgUrl = wikiCache[award.wikiPersonSearch] || null;
-        } else if (award.wikiFilmSearch) {
-          imgUrl = wikiCache[award.wikiFilmSearch] || null;
-        }
-
-        const placeholder = isPerson ? '🎭' : '🎬';
-        const imgHtml = (award.wikiFilmSearch || (isPerson && award.wikiPersonSearch))
-          ? `<div class="card-img-wrap ${isPerson ? 'tall' : ''}">
-               ${imgUrl
-                 ? `<img src="${imgUrl}" alt="${award.winner}" loading="lazy"
-                      onerror="this.parentElement.innerHTML='<div class=\\'card-img-placeholder\\'>${placeholder}</div>'">`
-                 : `<div class="card-img-placeholder">${placeholder}</div>`}
-               <div class="img-badge">★ Winner</div>
-             </div>`
-          : '';
-
-        card.innerHTML = `
-          ${imgHtml}
-          <div class="card-body">
-            <div class="award-name">${award.category||''}</div>
-            <div class="award-winner">${award.winner||'—'}</div>
-            ${award.detail ? `<div class="award-detail">${award.detail}</div>` : ''}
-            <span class="oscar-icon">🏆</span>
-          </div>`;
-        grid.appendChild(card);
-      });
-
-      section.appendChild(grid);
-      block.appendChild(section);
-    });
-
-    root.appendChild(block);
-  });
-}
+  function logout() {
+    document.getElementById("loginCard").style.display = "block";
+    document.getElementById("dashboard").style.display = "none";
+    document.body.style.alignItems = "center";
+    document.getElementById("email").value = "";
+    document.getElementById("pass").value  = "";
+    document.getElementById("role").value  = "";
+  }
 </script>
 </body>
 </html>
